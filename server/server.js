@@ -3,23 +3,23 @@ import express from 'express';
 import cors from 'cors';
 import webpack from 'webpack';
 import webpackConfig from './../webpack.dev'
-// import webpackDevMiddleware from 'webpack-dev-middleware';
-// const compiler = webpack(webpackConfig);
-// import webpackHotMiddleware from "webpack-hot-middleware";
+import webpackDevMiddleware from 'webpack-dev-middleware';
+const compiler = webpack(webpackConfig);
+import webpackHotMiddleware from "webpack-hot-middleware";
 
 import  socketIO from 'socket.io'
 
 let app = express();
-// app.use(webpackDevMiddleware(compiler, {
-//     noInfo: true,
-//     publicPath: webpackConfig.output.publicPath,
-//     inline:true
-// }));
-// app.use(webpackHotMiddleware(compiler, {
-//     'log': false,
-//     'path': '/__webpack_hmr',
-//     'heartbeat': 10 * 1000
-// }));
+app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath,
+    inline:true
+}));
+app.use(webpackHotMiddleware(compiler, {
+    'log': false,
+    'path': '/__webpack_hmr',
+    'heartbeat': 10 * 1000
+}));
 
 app.use(cors());
 const server = http.createServer(app);
