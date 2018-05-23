@@ -6,7 +6,7 @@ const DIST_DIR = path.join(__dirname, "public");
 const ENTRY_FILE = path.join(__dirname, "index.js");
 
 module.exports = {
-  entry: ENTRY_FILE,
+  entry: ['babel-polyfill', ENTRY_FILE],
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
